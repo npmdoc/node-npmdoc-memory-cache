@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/ptarjan/node-cache#readme"
-
-    >memory-cache (v0.1.6)</a>
+    <a href="https://github.com/ptarjan/node-cache#readme">memory-cache (v0.1.6)</a>
 </h1>
 <h4>A simple in-memory cache. put(), get() and del()</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.memory-cache">module memory-cache</a><ol>
 
@@ -311,7 +304,7 @@
 chai.use(sinonChai);
 
 
-describe(&#x27;node-cache&#x27;, function() {
+describe('node-cache', function() {
 beforeEach(function() {
   clock = sinon.useFakeTimers();
 
@@ -322,7 +315,7 @@ afterEach(function() {
   clock.restore();
 });
 
-describe(&#x27;put()&#x27;, function() {
+describe('put()', function() {
 ...</pre></li>
     </ul>
 
@@ -344,14 +337,14 @@ describe(&#x27;put()&#x27;, function() {
 clock.restore();
   });
 
-  describe(&#x27;put()&#x27;, function() {
+  describe('put()', function() {
 before(function() {
   cache.<span class="apidocCodeKeywordSpan">debug</span>(false);
 });
 
-it(&#x27;should allow adding a new item to the cache&#x27;, function() {
+it('should allow adding a new item to the cache', function() {
   expect(function() {
-    cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+    cache.put('key', 'value');
   }).to.not.throw();
 });
 ...</pre></li>
@@ -372,7 +365,7 @@ it(&#x27;should allow adding a new item to the cache&#x27;, function() {
   var oldRecord = cache[key];
   if (oldRecord) {
     clearTimeout(oldRecord.timeout);
-    if (!isNaN(oldRecord.expire) &#x26;&#x26; oldRecord.expire &#x3c; Date.now()) {
+    if (!isNaN(oldRecord.expire) &amp;&amp; oldRecord.expire &lt; Date.now()) {
       canDelete = false;
     }
   } else {
@@ -387,18 +380,18 @@ it(&#x27;should allow adding a new item to the cache&#x27;, function() {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-  describe(&#x27;del()&#x27;, function() {
+  describe('del()', function() {
 before(function() {
   cache.debug(false);
 });
 
-it(&#x27;should return false given a key for an empty cache&#x27;, function() {
-  expect(cache.<span class="apidocCodeKeywordSpan">del</span>(&#x27;miss&#x27;)).to.be.false;
+it('should return false given a key for an empty cache', function() {
+  expect(cache.<span class="apidocCodeKeywordSpan">del</span>('miss')).to.be.false;
 });
 
-it(&#x27;should return false given a key not in a non-empty cache&#x27;, function() {
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
-  expect(cache.del(&#x27;miss&#x27;)).to.be.false;
+it('should return false given a key not in a non-empty cache', function() {
+  cache.put('key', 'value');
+  expect(cache.del('miss')).to.be.false;
 });
 ...</pre></li>
     </ul>
@@ -414,8 +407,8 @@ it(&#x27;should return false given a key not in a non-empty cache&#x27;, functio
     <ul>
     <li>description and source-code<pre class="apidocCodePre">get = function (key) {
   var data = cache[key];
-  if (typeof data != &#x22;undefined&#x22;) {
-    if (isNaN(data.expire) || data.expire &#x3e;= Date.now()) {
+  if (typeof data != "undefined") {
+    if (isNaN(data.expire) || data.expire &gt;= Date.now()) {
       if (debug) hitCount++;
       return data.value;
     } else {
@@ -432,17 +425,17 @@ it(&#x27;should return false given a key not in a non-empty cache&#x27;, functio
     <li>example usage<pre class="apidocCodePre">...
 
 ```javascript
-var cache = require(&#x27;memory-cache&#x27;);
+var cache = require('memory-cache');
 
 // now just use the cache
 
-cache.put(&#x27;foo&#x27;, &#x27;bar&#x27;);
-console.log(cache.<span class="apidocCodeKeywordSpan">get</span>(&#x27;foo&#x27;));
+cache.put('foo', 'bar');
+console.log(cache.<span class="apidocCodeKeywordSpan">get</span>('foo'));
 
-// that wasn&#x27;t too interesting, here&#x27;s the good part
+// that wasn't too interesting, here's the good part
 
-cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) {
-    console.log(key + &#x27; did &#x27; + value);
+cache.put('houdini', 'disappear', 100, function(key, value) {
+    console.log(key + ' did ' + value);
 }); // Time in ms
 ...</pre></li>
     </ul>
@@ -463,18 +456,18 @@ cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) 
   expect(cache.size()).to.equal(0);
 });
 
-it(&#x27;should reset the debug cache hits&#x27;, function() {
+it('should reset the debug cache hits', function() {
   cache.debug(true);
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
-  cache.get(&#x27;key&#x27;);
+  cache.put('key', 'value');
+  cache.get('key');
   expect(cache.<span class="apidocCodeKeywordSpan">hits</span>()).to.equal(1);
   cache.clear();
   expect(cache.hits()).to.equal(0);
 });
 
-it(&#x27;should reset the debug cache misses&#x27;, function() {
+it('should reset the debug cache misses', function() {
   cache.debug(true);
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+  cache.put('key', 'value');
 ...</pre></li>
     </ul>
 
@@ -522,17 +515,17 @@ exports.keys = function() {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-  describe(&#x27;memsize()&#x27;, function() {
+  describe('memsize()', function() {
 before(function() {
   cache.debug(false);
 });
 
-it(&#x27;should return 0 given a fresh cache&#x27;, function() {
+it('should return 0 given a fresh cache', function() {
   expect(cache.<span class="apidocCodeKeywordSpan">memsize</span>()).to.equal(0);
 });
 
-it(&#x27;should return 1 after adding a single item to the cache&#x27;, function() {
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+it('should return 1 after adding a single item to the cache', function() {
+  cache.put('key', 'value');
   expect(cache.memsize()).to.equal(1);
 });
 ...</pre></li>
@@ -554,16 +547,16 @@ it(&#x27;should return 1 after adding a single item to the cache&#x27;, function
   expect(cache.hits()).to.equal(0);
 });
 
-it(&#x27;should reset the debug cache misses&#x27;, function() {
+it('should reset the debug cache misses', function() {
   cache.debug(true);
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
-  cache.get(&#x27;miss1&#x27;);
+  cache.put('key', 'value');
+  cache.get('miss1');
   expect(cache.<span class="apidocCodeKeywordSpan">misses</span>()).to.equal(1);
   cache.clear();
   expect(cache.misses()).to.equal(0);
 });
 
-it(&#x27;should cancel the timeout callbacks for all existing keys&#x27;, function() {
+it('should cancel the timeout callbacks for all existing keys', function() {
   var spy1 = sinon.spy();
   var spy2 = sinon.spy();
 ...</pre></li>
@@ -580,13 +573,13 @@ it(&#x27;should cancel the timeout callbacks for all existing keys&#x27;, functi
     <ul>
     <li>description and source-code<pre class="apidocCodePre">put = function (key, value, time, timeoutCallback) {
   if (debug) {
-    console.log(&#x27;caching: %s = %j (@%s)&#x27;, key, value, time);
+    console.log('caching: %s = %j (@%s)', key, value, time);
   }
 
-  if (typeof time !== &#x27;undefined&#x27; &#x26;&#x26; (typeof time !== &#x27;number&#x27; || isNaN(time) || time &#x3c;= 0)) {
-    throw new Error(&#x27;Cache timeout must be a positive number&#x27;);
-  } else if (typeof timeoutCallback !== &#x27;undefined&#x27; &#x26;&#x26; typeof timeoutCallback !== &#x27;function&#x27;) {
-    throw new Error(&#x27;Cache timeout callback must be a function&#x27;);
+  if (typeof time !== 'undefined' &amp;&amp; (typeof time !== 'number' || isNaN(time) || time &lt;= 0)) {
+    throw new Error('Cache timeout must be a positive number');
+  } else if (typeof timeoutCallback !== 'undefined' &amp;&amp; typeof timeoutCallback !== 'function') {
+    throw new Error('Cache timeout callback must be a function');
   }
 
   var oldRecord = cache[key];
@@ -618,17 +611,17 @@ it(&#x27;should cancel the timeout callbacks for all existing keys&#x27;, functi
 ## Usage
 
 ```javascript
-var cache = require(&#x27;memory-cache&#x27;);
+var cache = require('memory-cache');
 
 // now just use the cache
 
-cache.<span class="apidocCodeKeywordSpan">put</span>(&#x27;foo&#x27;, &#x27;bar&#x27;);
-console.log(cache.get(&#x27;foo&#x27;));
+cache.<span class="apidocCodeKeywordSpan">put</span>('foo', 'bar');
+console.log(cache.get('foo'));
 
-// that wasn&#x27;t too interesting, here&#x27;s the good part
+// that wasn't too interesting, here's the good part
 
-cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) {
-    console.log(key + &#x27; did &#x27; + value);
+cache.put('houdini', 'disappear', 100, function(key, value) {
+    console.log(key + ' did ' + value);
 }); // Time in ms
 ...</pre></li>
     </ul>
@@ -646,21 +639,21 @@ cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) 
   return size;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  expect(cache.get(&#x27;key&#x27;)).to.equal(&#x27;value&#x27;);
-  expect(cache.del(&#x27;key&#x27;)).to.be.true;
-  expect(cache.get(&#x27;key&#x27;)).to.be.null;
+  expect(cache.get('key')).to.equal('value');
+  expect(cache.del('key')).to.be.true;
+  expect(cache.get('key')).to.be.null;
 });
 
-it(&#x27;should decrement the cache size by 1&#x27;, function() {
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+it('should decrement the cache size by 1', function() {
+  cache.put('key', 'value');
   expect(cache.<span class="apidocCodeKeywordSpan">size</span>()).to.equal(1);
-  expect(cache.del(&#x27;key&#x27;)).to.be.true;
+  expect(cache.del('key')).to.be.true;
   expect(cache.size()).to.equal(0);
 });
 
-it(&#x27;should not remove other keys in the cache&#x27;, function() {
-  cache.put(&#x27;key1&#x27;, &#x27;value1&#x27;);
-  cache.put(&#x27;key2&#x27;, &#x27;value2&#x27;);
+it('should not remove other keys in the cache', function() {
+  cache.put('key1', 'value1');
+  cache.put('key2', 'value2');
 ...</pre></li>
     </ul>
 
@@ -693,7 +686,7 @@ it(&#x27;should not remove other keys in the cache&#x27;, function() {
 chai.use(sinonChai);
 
 
-describe(&#x27;node-cache&#x27;, function() {
+describe('node-cache', function() {
 beforeEach(function() {
   clock = sinon.useFakeTimers();
 
@@ -704,7 +697,7 @@ afterEach(function() {
   clock.restore();
 });
 
-describe(&#x27;put()&#x27;, function() {
+describe('put()', function() {
 ...</pre></li>
     </ul>
 
@@ -731,14 +724,14 @@ describe(&#x27;put()&#x27;, function() {
 clock.restore();
   });
 
-  describe(&#x27;put()&#x27;, function() {
+  describe('put()', function() {
 before(function() {
   cache.<span class="apidocCodeKeywordSpan">debug</span>(false);
 });
 
-it(&#x27;should allow adding a new item to the cache&#x27;, function() {
+it('should allow adding a new item to the cache', function() {
   expect(function() {
-    cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+    cache.put('key', 'value');
   }).to.not.throw();
 });
 ...</pre></li>
@@ -764,7 +757,7 @@ it(&#x27;should allow adding a new item to the cache&#x27;, function() {
   var oldRecord = cache[key];
   if (oldRecord) {
     clearTimeout(oldRecord.timeout);
-    if (!isNaN(oldRecord.expire) &#x26;&#x26; oldRecord.expire &#x3c; Date.now()) {
+    if (!isNaN(oldRecord.expire) &amp;&amp; oldRecord.expire &lt; Date.now()) {
       canDelete = false;
     }
   } else {
@@ -779,18 +772,18 @@ it(&#x27;should allow adding a new item to the cache&#x27;, function() {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-  describe(&#x27;del()&#x27;, function() {
+  describe('del()', function() {
 before(function() {
   cache.debug(false);
 });
 
-it(&#x27;should return false given a key for an empty cache&#x27;, function() {
-  expect(cache.<span class="apidocCodeKeywordSpan">del</span>(&#x27;miss&#x27;)).to.be.false;
+it('should return false given a key for an empty cache', function() {
+  expect(cache.<span class="apidocCodeKeywordSpan">del</span>('miss')).to.be.false;
 });
 
-it(&#x27;should return false given a key not in a non-empty cache&#x27;, function() {
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
-  expect(cache.del(&#x27;miss&#x27;)).to.be.false;
+it('should return false given a key not in a non-empty cache', function() {
+  cache.put('key', 'value');
+  expect(cache.del('miss')).to.be.false;
 });
 ...</pre></li>
     </ul>
@@ -811,8 +804,8 @@ it(&#x27;should return false given a key not in a non-empty cache&#x27;, functio
     <ul>
     <li>description and source-code<pre class="apidocCodePre">get = function (key) {
   var data = cache[key];
-  if (typeof data != &#x22;undefined&#x22;) {
-    if (isNaN(data.expire) || data.expire &#x3e;= Date.now()) {
+  if (typeof data != "undefined") {
+    if (isNaN(data.expire) || data.expire &gt;= Date.now()) {
       if (debug) hitCount++;
       return data.value;
     } else {
@@ -829,17 +822,17 @@ it(&#x27;should return false given a key not in a non-empty cache&#x27;, functio
     <li>example usage<pre class="apidocCodePre">...
 
 ```javascript
-var cache = require(&#x27;memory-cache&#x27;);
+var cache = require('memory-cache');
 
 // now just use the cache
 
-cache.put(&#x27;foo&#x27;, &#x27;bar&#x27;);
-console.log(cache.<span class="apidocCodeKeywordSpan">get</span>(&#x27;foo&#x27;));
+cache.put('foo', 'bar');
+console.log(cache.<span class="apidocCodeKeywordSpan">get</span>('foo'));
 
-// that wasn&#x27;t too interesting, here&#x27;s the good part
+// that wasn't too interesting, here's the good part
 
-cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) {
-    console.log(key + &#x27; did &#x27; + value);
+cache.put('houdini', 'disappear', 100, function(key, value) {
+    console.log(key + ' did ' + value);
 }); // Time in ms
 ...</pre></li>
     </ul>
@@ -865,18 +858,18 @@ cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) 
   expect(cache.size()).to.equal(0);
 });
 
-it(&#x27;should reset the debug cache hits&#x27;, function() {
+it('should reset the debug cache hits', function() {
   cache.debug(true);
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
-  cache.get(&#x27;key&#x27;);
+  cache.put('key', 'value');
+  cache.get('key');
   expect(cache.<span class="apidocCodeKeywordSpan">hits</span>()).to.equal(1);
   cache.clear();
   expect(cache.hits()).to.equal(0);
 });
 
-it(&#x27;should reset the debug cache misses&#x27;, function() {
+it('should reset the debug cache misses', function() {
   cache.debug(true);
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+  cache.put('key', 'value');
 ...</pre></li>
     </ul>
 
@@ -934,17 +927,17 @@ exports.keys = function() {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
-  describe(&#x27;memsize()&#x27;, function() {
+  describe('memsize()', function() {
 before(function() {
   cache.debug(false);
 });
 
-it(&#x27;should return 0 given a fresh cache&#x27;, function() {
+it('should return 0 given a fresh cache', function() {
   expect(cache.<span class="apidocCodeKeywordSpan">memsize</span>()).to.equal(0);
 });
 
-it(&#x27;should return 1 after adding a single item to the cache&#x27;, function() {
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+it('should return 1 after adding a single item to the cache', function() {
+  cache.put('key', 'value');
   expect(cache.memsize()).to.equal(1);
 });
 ...</pre></li>
@@ -971,16 +964,16 @@ it(&#x27;should return 1 after adding a single item to the cache&#x27;, function
   expect(cache.hits()).to.equal(0);
 });
 
-it(&#x27;should reset the debug cache misses&#x27;, function() {
+it('should reset the debug cache misses', function() {
   cache.debug(true);
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
-  cache.get(&#x27;miss1&#x27;);
+  cache.put('key', 'value');
+  cache.get('miss1');
   expect(cache.<span class="apidocCodeKeywordSpan">misses</span>()).to.equal(1);
   cache.clear();
   expect(cache.misses()).to.equal(0);
 });
 
-it(&#x27;should cancel the timeout callbacks for all existing keys&#x27;, function() {
+it('should cancel the timeout callbacks for all existing keys', function() {
   var spy1 = sinon.spy();
   var spy2 = sinon.spy();
 ...</pre></li>
@@ -1002,13 +995,13 @@ it(&#x27;should cancel the timeout callbacks for all existing keys&#x27;, functi
     <ul>
     <li>description and source-code<pre class="apidocCodePre">put = function (key, value, time, timeoutCallback) {
   if (debug) {
-    console.log(&#x27;caching: %s = %j (@%s)&#x27;, key, value, time);
+    console.log('caching: %s = %j (@%s)', key, value, time);
   }
 
-  if (typeof time !== &#x27;undefined&#x27; &#x26;&#x26; (typeof time !== &#x27;number&#x27; || isNaN(time) || time &#x3c;= 0)) {
-    throw new Error(&#x27;Cache timeout must be a positive number&#x27;);
-  } else if (typeof timeoutCallback !== &#x27;undefined&#x27; &#x26;&#x26; typeof timeoutCallback !== &#x27;function&#x27;) {
-    throw new Error(&#x27;Cache timeout callback must be a function&#x27;);
+  if (typeof time !== 'undefined' &amp;&amp; (typeof time !== 'number' || isNaN(time) || time &lt;= 0)) {
+    throw new Error('Cache timeout must be a positive number');
+  } else if (typeof timeoutCallback !== 'undefined' &amp;&amp; typeof timeoutCallback !== 'function') {
+    throw new Error('Cache timeout callback must be a function');
   }
 
   var oldRecord = cache[key];
@@ -1040,17 +1033,17 @@ it(&#x27;should cancel the timeout callbacks for all existing keys&#x27;, functi
 ## Usage
 
 ```javascript
-var cache = require(&#x27;memory-cache&#x27;);
+var cache = require('memory-cache');
 
 // now just use the cache
 
-cache.<span class="apidocCodeKeywordSpan">put</span>(&#x27;foo&#x27;, &#x27;bar&#x27;);
-console.log(cache.get(&#x27;foo&#x27;));
+cache.<span class="apidocCodeKeywordSpan">put</span>('foo', 'bar');
+console.log(cache.get('foo'));
 
-// that wasn&#x27;t too interesting, here&#x27;s the good part
+// that wasn't too interesting, here's the good part
 
-cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) {
-    console.log(key + &#x27; did &#x27; + value);
+cache.put('houdini', 'disappear', 100, function(key, value) {
+    console.log(key + ' did ' + value);
 }); // Time in ms
 ...</pre></li>
     </ul>
@@ -1073,21 +1066,21 @@ cache.put(&#x27;houdini&#x27;, &#x27;disappear&#x27;, 100, function(key, value) 
   return size;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  expect(cache.get(&#x27;key&#x27;)).to.equal(&#x27;value&#x27;);
-  expect(cache.del(&#x27;key&#x27;)).to.be.true;
-  expect(cache.get(&#x27;key&#x27;)).to.be.null;
+  expect(cache.get('key')).to.equal('value');
+  expect(cache.del('key')).to.be.true;
+  expect(cache.get('key')).to.be.null;
 });
 
-it(&#x27;should decrement the cache size by 1&#x27;, function() {
-  cache.put(&#x27;key&#x27;, &#x27;value&#x27;);
+it('should decrement the cache size by 1', function() {
+  cache.put('key', 'value');
   expect(cache.<span class="apidocCodeKeywordSpan">size</span>()).to.equal(1);
-  expect(cache.del(&#x27;key&#x27;)).to.be.true;
+  expect(cache.del('key')).to.be.true;
   expect(cache.size()).to.equal(0);
 });
 
-it(&#x27;should not remove other keys in the cache&#x27;, function() {
-  cache.put(&#x27;key1&#x27;, &#x27;value1&#x27;);
-  cache.put(&#x27;key2&#x27;, &#x27;value2&#x27;);
+it('should not remove other keys in the cache', function() {
+  cache.put('key1', 'value1');
+  cache.put('key2', 'value2');
 ...</pre></li>
     </ul>
 
@@ -1100,3 +1093,4 @@ it(&#x27;should not remove other keys in the cache&#x27;, function() {
     ]
 </div>
 </div>
+</body></html>
