@@ -1,4 +1,7 @@
-# api documentation for  [memory-cache (v0.1.6)](https://github.com/ptarjan/node-cache#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-memory-cache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-memory-cache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-memory-cache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-memory-cache)
+# npmdoc-memory-cache
+
+#### basic api documentation for  [memory-cache (v0.1.6)](https://github.com/ptarjan/node-cache#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-memory-cache.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-memory-cache) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-memory-cache.svg)](https://travis-ci.org/npmdoc/node-npmdoc-memory-cache)
+
 #### A simple in-memory cache. put(), get() and del()
 
 [![NPM](https://nodei.co/npm/memory-cache.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/memory-cache)
@@ -74,7 +77,8 @@
     "scripts": {
         "test": "gulp test"
     },
-    "version": "0.1.6"
+    "version": "0.1.6",
+    "bin": {}
 }
 ```
 
